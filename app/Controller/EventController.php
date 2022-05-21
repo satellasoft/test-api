@@ -65,8 +65,8 @@ class EventController
 
                 responseJson(
                     ['destination' => [
-                        'id'     => $account->getId(),
-                        'amount' => $account->getAmount()
+                        'id'     => "{$account->getId()}",
+                        'balance' => $account->getAmount()
                     ]],
                     201
                 );
@@ -80,8 +80,8 @@ class EventController
 
             responseJson(
                 ['destination' => [
-                    'id'     => $account->getId(),
-                    'amount' => $account->getAmount()
+                    'id'     => "{$account->getId()}",
+                    'balance' => $account->getAmount()
                 ]],
                 201
             );
@@ -116,7 +116,7 @@ class EventController
 
             responseJson(
                 ['origin' => [
-                    'id'     => $account->getId(),
+                    'id'     => "{$account->getId()}",
                     'balance' => $account->getAmount()
                 ]],
                 201
@@ -176,15 +176,15 @@ class EventController
         //{"origin": {"id":"100", "balance":0}, "destination": {"id":"300", "balance":15}}
         responseJson([
             'origin'      => [
-                'id'      => $acountOrigin->getId(),
+                'id'      => "{$acountOrigin->getId()}",
                 'balance' => $acountOrigin->getAmount()
             ],
             'destination' => [
-                'id'      => $acountDestination->getId(),
+                'id'      => "{$acountDestination->getId()}",
                 'balance' => $acountDestination->getAmount()
             ]
         ], 201);
-        
+
         return true;
     }
 }

@@ -28,7 +28,7 @@ class Reset
 
             fclose($fp);
 
-            responseJson([], 200);
+            responseJson('OK', 200);
 
             return true;
         } catch (\Exception $ex) {
