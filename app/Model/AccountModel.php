@@ -63,8 +63,10 @@ class AccountModel implements IAccount
 
         $accounts = $this->getData();
 
-        for ($i = 0; count($accounts); $i++) {
+        for ($i = 0; $i < count($accounts); $i++) {
+
             if ($accounts[$i]['id'] == $origin->getId()) {
+
                 $accounts[$i] = [
                     'id'     => $origin->getId(),
                     'amount' => $origin->getAmount()

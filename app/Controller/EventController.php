@@ -139,30 +139,52 @@ class EventController
             return false;
         }
 
+
+        //create new instance of AccountModel
         $accountModel = new AccountModel();
 
+        //Get Account Origin
+        $acountOrigin = $accountModel->getAccountById($raw['origin']);
+
         //Check if origin not exists
-        if ($accountModel->getAccountById($raw['origin']) == null) {
+        if ($acountOrigin == null) {
             responseJson(0, 404);
             return false;
         }
+
+        //Get Account destination
+        $acountDestination = $accountModel->getAccountById($raw['destination']);
 
         //Check if destination not exists
-        if ($accountModel->getAccountById($raw['destination']) == null) {
+        if ($acountDestination == null) {
             responseJson(0, 404);
             return false;
         }
 
-        $acountOrigin = new Account($raw['origin']);
-        $acountDestination = new Account($raw['destination']);
+        //Add
+        $acountOrigin->setAmount(((float)$acountOrigin->getAmount() - $raw['amount']));
 
-        $acountOrigin->setAmount($acountOrigin->getAmount() - $raw['amount']);
-
+        //Subtract
         $acountDestination->setAmount($acountDestination->getAmount() + $raw['amount']);
+
 
         if (!$accountModel->updateTransfer($acountOrigin, $acountDestination)) {
             responseJson(0, 404);
             return false;
         }
+
+        //{"origin": {"id":"100", "balance":0}, "destination": {"id":"300", "balance":15}}
+        responseJson([
+            'origin'      => [
+                'id'      => $acountOrigin->getId(),
+                'balance' => $acountOrigin->getAmount()
+            ],
+            'destination' => [
+                'id'      => $acountDestination->getId(),
+                'balance' => $acountDestination->getAmount()
+            ]
+        ], 201);
+        
+        return true;
     }
 }
