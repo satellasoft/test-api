@@ -1,0 +1,14 @@
+{
+    "name": "gunnar/api-teste",
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        },
+        "files": [
+            "app/Functions/global.php",
+            "app/Config.php",
+            "app/Router.php"
+        ]
+    },
+    "require": {}
+}
