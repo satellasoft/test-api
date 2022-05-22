@@ -12,7 +12,7 @@ class BalanceController
 {
     
     /**
-     * get amount by ID acount
+     * Get amount by ID acount
      *
      * @return void
      */

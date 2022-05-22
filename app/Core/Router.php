@@ -14,7 +14,7 @@ class Router
     {
         $this->path = $this->getPath();
 
-        $this->type = $_SERVER['REQUEST_METHOD'];
+        $this->type = $_SERVER['REQUEST_METHOD'] ?? 'GET';
     }
 
     public function post(string $path, array $action)
