@@ -5,10 +5,10 @@ namespace App\Core;
 class Router
 {
     private ?string $path;
-    private string $type;
+    private string  $type;
 
     private array $postRoute = [];
-    private array $getRoute = [];
+    private array $getRoute  = [];
 
     public function __construct()
     {
@@ -84,10 +84,6 @@ class Router
         }
 
         return false;
-    }
-
-    private function executeController($controller, $method)
-    {
     }
 
     private function getPath(): ?string

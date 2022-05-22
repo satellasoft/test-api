@@ -102,9 +102,9 @@ class EventController
 
         $accountModel = new AccountModel();
 
-        $acount = $accountModel->getAccountById($raw['origin']);
+        $exits = $accountModel->getAccountById($raw['origin']);
 
-        if ($acount == null) {
+        if ($exits == null) {
             responseJson(0, 404);
             return false;
         }
@@ -116,7 +116,7 @@ class EventController
 
             responseJson(
                 ['origin' => [
-                    'id'     => "{$account->getId()}",
+                    'id'      => "{$account->getId()}",
                     'balance' => $account->getAmount()
                 ]],
                 201
@@ -127,9 +127,6 @@ class EventController
 
         responseJson([], 422);
         return false;
-
-
-        return true;
     }
 
     private function transfer(array $raw): bool
@@ -138,7 +135,6 @@ class EventController
             responseJson(0, 404);
             return false;
         }
-
 
         //create new instance of AccountModel
         $accountModel = new AccountModel();
@@ -167,13 +163,11 @@ class EventController
         //Subtract
         $acountDestination->setAmount($acountDestination->getAmount() + $raw['amount']);
 
-
         if (!$accountModel->updateTransfer($acountOrigin, $acountDestination)) {
             responseJson(0, 404);
             return false;
         }
 
-        //{"origin": {"id":"100", "balance":0}, "destination": {"id":"300", "balance":15}}
         responseJson([
             'origin'      => [
                 'id'      => "{$acountOrigin->getId()}",
